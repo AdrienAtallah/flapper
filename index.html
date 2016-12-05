@@ -79,13 +79,12 @@
             <span class="glyphicon glyphicon-thumbs-up"
             ng-click="incrementUpvotes(comment)"></span>
             {{comment.upvotes}} - by {{comment.author}}
-            <span style="font-size:20px; margin-left:10px;">
+            <span id="comment-body">
                 {{comment.body}}
             </span>
         </div>
-        
-        <form ng-submit="addComment()"
-        style="margin-top:30px;">
+
+        <form id="add-comment" ng-submit="addComment()">
         <h3>Add a new comment</h3>
 
         <div class="form-group">
