@@ -30,3 +30,10 @@ app.controller('MainCtrl', [
         };
 
     }]);
+
+    app.factory('posts', [function(){
+        var o = {
+            posts: []
+        };
+        return o;
+    }])
