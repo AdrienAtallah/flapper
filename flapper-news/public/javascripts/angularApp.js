@@ -66,10 +66,11 @@ app.config([
     app.controller('MainCtrl', [
         '$scope',
         'posts',
-        function($scope, posts){
+        'post',
+        function($scope, posts, post){
 
-            $scope.posts = posts.posts;
-
+            $scope.posts = post;
+            
             $scope.addPost = function(){
                 if(!$scope.title || $scope.title === '') { return; }
 
