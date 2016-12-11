@@ -49,14 +49,14 @@ app.controller('MainCtrl', [
 
         }]);
 
-        app.factory('posts', ['$http', function($http){
+        app.factory('posts', ['$http', function($http){ //inject $http for performing GET request
             var o = {
                 posts: []
             };
 
             o.getAll = function() {
                 return $http.get('/posts').success(function(data){
-                    angular.copy(data, o.posts); //create a deep copy -ensures $scope.posts will be updated in MainCtrl so new values will be reflected in view
+                    angular.copy(data, o.posts); //create a deep copy -ensures $scope.posts will be updated in MainCtrl so new values will be reflected in view. copies response post from GET request.
                 });
             };
 
@@ -73,6 +73,11 @@ app.controller('MainCtrl', [
                     url: '/home',
                     templateUrl: '/home.html',
                     controller: 'MainCtrl'
+                    resolve: { //query backend to GET all posts when home state is entered
+                        postPromise: ['posts', function(posts){
+                            return posts.getAll();
+                        }]
+                    }
                 });
 
                 $stateProvider
