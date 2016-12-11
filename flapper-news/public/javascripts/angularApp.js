@@ -54,6 +54,12 @@ app.config([
             });
         };
 
+        o.get = function(id) {
+            return $http.get('/posts/' + id).then(function(res){
+                return res.data;
+            });
+        };
+
         return o;
     }]);
 
@@ -75,7 +81,7 @@ app.config([
                 $scope.link = '';
 
             };
-            
+
             $scope.incrementUpvotes = function(post) {
                 posts.upvote(post);
             };
