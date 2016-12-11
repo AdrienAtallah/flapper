@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var app = express();
+
 //adding mongo***
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/news');
@@ -12,10 +14,12 @@ mongoose.connect('mongodb://localhost/news');
 require('./models/Posts');
 require('./models/Comments');
 
+
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-var app = express();
+
 //*********
 
 // view engine setup

@@ -6,6 +6,10 @@ var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 var Comment = mongoose.model('Comment');
 
+/* GET home page. */
+router.get('/', function(req, res) {
+    res.render('index');
+});
 
 router.param('post', function(req, res, next, id) {
     var query = Post.findById(id);
@@ -35,6 +39,7 @@ router.get('/posts', function(req, res, next) {
     Post.find(function(err, posts){
         if(err){ return next(err); }
 
+        console.log("asdfasdf");
         res.json(posts);
     });
 });
@@ -88,7 +93,5 @@ router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
         res.json(post);
     });
 });
-
-
 
 module.exports = router;
