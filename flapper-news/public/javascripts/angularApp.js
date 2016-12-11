@@ -108,7 +108,6 @@ app.config([
 
                 $scope.addComment = function(){
                     if($scope.body === '') { return; }
-
                     posts.addComment(post._id, {
                         body: $scope.body,
                         author: 'user',
@@ -121,4 +120,5 @@ app.config([
                 $scope.incrementUpvotes = function(comment){
                     posts.upvoteComment(post, comment);
                 };
+
             }]);
