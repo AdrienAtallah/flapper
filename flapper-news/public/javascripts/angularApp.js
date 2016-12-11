@@ -49,14 +49,14 @@ app.controller('MainCtrl', [
 
         }]);
 
-        app.factory('posts', [function(){
+        app.factory('posts', ['$http', function($http){
             var o = {
                 posts: []
             };
 
             o.getAll = function() {
                 return $http.get('/posts').success(function(data){
-                    angular.copy(data, o.posts);
+                    angular.copy(data, o.posts); //create a deep copy -ensures $scope.posts will be updated in MainCtrl so new values will be reflected in view
                 });
             };
 
