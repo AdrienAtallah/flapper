@@ -66,11 +66,10 @@ app.config([
     app.controller('MainCtrl', [
         '$scope',
         'posts',
-        'post',
-        function($scope, posts, post){
+        function($scope, posts){
 
-            $scope.posts = post;
-            
+            $scope.posts = posts.posts;
+
             $scope.addPost = function(){
                 if(!$scope.title || $scope.title === '') { return; }
 
@@ -91,10 +90,10 @@ app.config([
 
         app.controller('PostsCtrl', [
             '$scope',
-            '$stateParams',
             'posts',
-            function($scope, $stateParams, posts){
-                $scope.post = posts.posts[$stateParams.id];
+            'post',
+            function($scope, posts, post){
+                $scope.post = post;
 
                 $scope.addComment = function(){
                     if($scope.body === '') { return; }
