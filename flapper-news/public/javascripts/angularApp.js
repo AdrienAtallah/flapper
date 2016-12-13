@@ -67,6 +67,7 @@ app.config([
         o.upvoteComment = function(post, comment) {
             return $http.put('/posts/' + post._id + '/comments/'+ comment._id + '/upvote')
             .success(function(data){
+                console.log("asdfasdf");
                 comment.upvotes += 1;
             });
         };
