@@ -22,6 +22,7 @@ app.config([
             controller: 'PostsCtrl',
             resolve: {
                 post: ['$stateParams', 'posts', function($stateParams, posts) {
+                    console.log("posts route")
                     return posts.get($stateParams.id);
                 }]
             }
