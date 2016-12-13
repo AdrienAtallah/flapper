@@ -25,8 +25,6 @@ app.config([
                     return posts.get($stateParams.id);
                 }]
             }
-
-            console.log("posts route");
         });
         $urlRouterProvider.otherwise('home');
     }]);
