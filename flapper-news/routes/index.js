@@ -86,21 +86,11 @@ router.post('/posts/:post/comments', function(req, res, next) {
 });
 
 router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
-    console.log("asdfasdf");
     req.post.upvote(function(err, post){
         if (err) { return next(err); }
 
         res.json(post);
     });
 });
-
-//testing:
-// router.get('/posts/:post/comments/:comment', function(req, res, next) {
-//     //req.post.populate('comments', function(err, post) {
-//         if (err) { return next(err); }
-//
-//         res.json(comment);
-//     });
-// });
 
 module.exports = router;
