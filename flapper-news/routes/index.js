@@ -35,7 +35,8 @@ router.param('post', function(req, res, next, id) {
     query.exec(function (err, post){
         if (err) { return next(err); }
         if (!post) { return next(new Error('can\'t find post')); }
-
+        console.log("wewewo");
+        console.log(post);
         req.post = post;
         return next();
     });
@@ -47,8 +48,9 @@ router.param('comment', function(req, res, next, id) {
     query.exec(function (err, post){
         if (err) { return next(err); }
         if (!post) {
-            console.log("wewewo");
-            return next(new Error('can\'t find post'));
+            // console.log("wewewo");
+            // console.log(post);
+            return next(new Error('can\'t find post')); //error being thrown
         }
 
         req.post = post;
