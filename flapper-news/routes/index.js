@@ -48,7 +48,7 @@ router.param('comment', function(req, res, next, id) {
     query.exec(function (err, post){
         if (err) { return next(err); }
         if (!post) {
-            // console.log("wewewo");
+             console.log("roooott comment");
             // console.log(post);
             return next(new Error('can\'t find post')); //error being thrown
         }
