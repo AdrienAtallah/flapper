@@ -33,69 +33,71 @@ router.param('post', function(req, res, next, id) {
     var query = Post.findById(id);
 
     query.exec(function (err, post){
-        if (err) { return next(err); }
-        if (!post) { return next(new Error('can\'t find post')); }
-        console.log("wewewo");
-        console.log(post);
-        req.post = post;
-        return next();
-    });
-});
+        if (err) {
+            console.log("wewewo");
+            return next(err); }
+            if (!post) { return next(new Error('can\'t find post')); }
 
-router.param('comment', function(req, res, next, id) {
-    var query = Post.findById(id);
-
-    query.exec(function (err, post){
-        if (err) { return next(err); }
-        if (!post) {
-             console.log("roooott comment");
-            // console.log(post);
-            return next(new Error('can\'t find post')); //error being thrown
-        }
-
-        req.post = post;
-        return next();
-    });
-});
-
-router.get('/posts/:post', function(req, res, next) {
-    req.post.populate('comments', function(err, post) {
-        if (err) { return next(err); }
-
-        res.json(post);
-    });
-});
-
-router.put('/posts/:post/upvote', function(req, res, next) {
-    req.post.upvote(function(err, post){
-
-        if (err) { return next(err); }
-        res.json(post);
-    });
-});
-
-router.post('/posts/:post/comments', function(req, res, next) {
-    var comment = new Comment(req.body);
-    comment.post = req.post;
-
-    comment.save(function(err, comment){
-        if(err){ return next(err); }
-
-        req.post.comments.push(comment);
-        req.post.save(function(err, post) {
-            if(err){ return next(err); }
-
-            res.json(comment);
+            console.log(post);
+            req.post = post;
+            return next();
         });
     });
-});
 
-router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
-    req.post.upvote(function(err, post){
-        if (err) { return next(err); }
+    router.param('comment', function(req, res, next, id) {
+        var query = Post.findById(id);
 
-        res.json(post);
+        query.exec(function (err, post){
+            if (err) { return next(err); }
+            if (!post) {
+                console.log("roooott comment");
+                // console.log(post);
+                return next(new Error('can\'t find post')); //error being thrown
+            }
+
+            req.post = post;
+            return next();
+        });
     });
-});
 
-module.exports = router;
+    router.get('/posts/:post', function(req, res, next) {
+        req.post.populate('comments', function(err, post) {
+            if (err) { return next(err); }
+
+            res.json(post);
+        });
+    });
+
+    router.put('/posts/:post/upvote', function(req, res, next) {
+        req.post.upvote(function(err, post){
+
+            if (err) { return next(err); }
+            res.json(post);
+        });
+    });
+
+    router.post('/posts/:post/comments', function(req, res, next) {
+        var comment = new Comment(req.body);
+        comment.post = req.post;
+
+        comment.save(function(err, comment){
+            if(err){ return next(err); }
+
+            req.post.comments.push(comment);
+            req.post.save(function(err, post) {
+                if(err){ return next(err); }
+
+                res.json(comment);
+            });
+        });
+    });
+
+    router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
+        req.post.upvote(function(err, post){
+            if (err) { return next(err); }
+
+            res.json(post);
+        });
+    });
+
+    module.exports = router;
